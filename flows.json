@@ -1,0 +1,321 @@
+[
+    {
+        "id": "74b807c803dade99",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "f52e6d328feab719",
+        "type": "mqtt-broker",
+        "name": "raspi-bp",
+        "broker": "localhost",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "95afb7d175fec37f",
+        "type": "mqtt in",
+        "z": "74b807c803dade99",
+        "name": "raspi-bp-sub",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f52e6d328feab719",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 60,
+        "wires": [
+            [
+                "0ed195331a3babcc"
+            ]
+        ]
+    },
+    {
+        "id": "d00564d0547d710e",
+        "type": "debug",
+        "z": "74b807c803dade99",
+        "name": "Thermometers",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "0ed195331a3babcc",
+        "type": "switch",
+        "z": "74b807c803dade99",
+        "name": "Is Thermometer",
+        "property": "payload.name",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "Nanoleaf",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "HTC-",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "ATC_",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 140,
+        "y": 140,
+        "wires": [
+            [
+                "6c0da17beb12fd06"
+            ],
+            [
+                "ad4cd6d8e80840ae"
+            ],
+            [
+                "48f2f049a70ea3da"
+            ],
+            [
+                "0a5c9d4d7b1d71ce"
+            ]
+        ]
+    },
+    {
+        "id": "0a5c9d4d7b1d71ce",
+        "type": "debug",
+        "z": "74b807c803dade99",
+        "name": "Others",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 90,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "48f2f049a70ea3da",
+        "type": "function",
+        "z": "74b807c803dade99",
+        "name": "Add Location",
+        "func": "const deviceLocations = [\n    { \"id\": \"A4:C1:38:21:C9:85\", \"house\": \"1 sayfield cottages\", \"room\": \"office\" },\n    { \"id\": \"A4:C1:38:17:06:8A\", \"house\": \"1 sayfield cottages\", \"room\": \"main bedroom\" },\n    { \"id\": \"A4:C1:38:14:B9:D7\", \"house\": \"1 sayfield cottages\", \"room\": \"playroom\" },\n    { \"id\": \"A4:C1:38:7B:29:6C\", \"house\": \"1 sayfield cottages\", \"room\": \"jan bedroom\" },\n    { \"id\": \"A4:C1:38:5B:DF:9E\", \"house\": \"1 sayfield cottages\", \"room\": \"tomek bedroom\" },\n    { \"id\": \"A4:C1:38:94:21:EC\", \"house\": \"1 sayfield cottages\", \"room\": \"workshop\" },\n    { \"id\": \"A4:C1:38:E1:1E:45\", \"house\": \"1 sayfield cottages\", \"room\": \"greenhouse\" },\n    { \"id\": \"A4:C1:38:34:70:8B\", \"house\": \"1 sayfield cottages\", \"room\": \"loft\" }\n];\n\nconst deviceLoation = deviceLocations.find(l => l.id == msg.payload.id);\n\nif (!!deviceLoation) {\n    msg.payload.house = deviceLoation.house;\n    msg.payload.room = deviceLoation.room;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 140,
+        "wires": [
+            [
+                "a08c6d7bd80937ec"
+            ]
+        ]
+    },
+    {
+        "id": "a08c6d7bd80937ec",
+        "type": "function",
+        "z": "74b807c803dade99",
+        "name": "Log Heartbeat",
+        "func": "let thermometers = flow.get('thermometers') || [];\nlet found = thermometers.find(t => t.id == msg.payload.id);\n\nif (!!found) {\n    found.lastLogged = new Date().toISOString();\n    found.payload = msg.payload;\n    found.totalHits++;\n} else {\n    found = {\n        id: msg.payload.id,\n        room: msg.payload.room,\n        lastLogged: Date.UTC,\n        totalHits: 1,\n        payload: msg.payload\n    }\n\n    thermometers.push(found);\n}\n\nflow.set('thermometers', thermometers);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 280,
+        "wires": [
+            [
+                "d00564d0547d710e"
+            ]
+        ]
+    },
+    {
+        "id": "cae33d75af04a246",
+        "type": "inject",
+        "z": "74b807c803dade99",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 80,
+        "y": 360,
+        "wires": [
+            [
+                "83fbe993c9319dfc"
+            ]
+        ]
+    },
+    {
+        "id": "83fbe993c9319dfc",
+        "type": "function",
+        "z": "74b807c803dade99",
+        "name": "Get Heartbeat",
+        "func": "const thermometers = flow.get('thermometers');\n\nmsg.topic = 'home/heartbeat';\nmsg.payload = thermometers;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 360,
+        "wires": [
+            [
+                "2e7998c322b72528",
+                "94ea7a7b1ed45695"
+            ]
+        ]
+    },
+    {
+        "id": "2e7998c322b72528",
+        "type": "debug",
+        "z": "74b807c803dade99",
+        "name": "Heartbeat",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 440,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "6c0da17beb12fd06",
+        "type": "debug",
+        "z": "74b807c803dade99",
+        "name": "Nanoleaf",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "ad4cd6d8e80840ae",
+        "type": "debug",
+        "z": "74b807c803dade99",
+        "name": "HTC",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 350,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "94ea7a7b1ed45695",
+        "type": "function",
+        "z": "74b807c803dade99",
+        "name": "Get Status",
+        "func": "const thermometers = flow.get('thermometers') || [];\nlet status = {};\n\nfor(let t of thermometers) {\n    status[t.payload.room] = t.payload.tempc;\n}\n\nmsg.payload = status;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 440,
+        "wires": [
+            [
+                "4d82ab8f033cc89b"
+            ]
+        ]
+    },
+    {
+        "id": "4d82ab8f033cc89b",
+        "type": "debug",
+        "z": "74b807c803dade99",
+        "name": "Status",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 430,
+        "y": 440,
+        "wires": []
+    }
+]
