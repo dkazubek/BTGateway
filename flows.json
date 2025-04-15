@@ -2,7 +2,7 @@
     {
         "id": "74b807c803dade99",
         "type": "tab",
-        "label": "Flow 1",
+        "label": "BTGateway",
         "disabled": false,
         "info": "",
         "env": []
@@ -34,6 +34,37 @@
         "willQos": "0",
         "willRetain": "false",
         "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "942356b676cc26bd",
+        "type": "mqtt-broker",
+        "name": "synology",
+        "broker": "192.168.1.187",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "sensors/status",
+        "birthQos": "1",
+        "birthRetain": "true",
+        "birthPayload": "ONLINE",
+        "birthMsg": {},
+        "closeTopic": "sensors/status",
+        "closeQos": "1",
+        "closeRetain": "true",
+        "closePayload": "OFFLINE",
+        "closeMsg": {},
+        "willTopic": "sensors/status",
+        "willQos": "1",
+        "willRetain": "true",
+        "willPayload": "DISCONNECTED",
         "willMsg": {},
         "userProps": "",
         "sessionExpiry": ""
@@ -72,8 +103,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 460,
-        "y": 280,
+        "x": 380,
+        "y": 300,
         "wires": []
     },
     {
@@ -106,8 +137,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 4,
-        "x": 140,
-        "y": 140,
+        "x": 160,
+        "y": 160,
         "wires": [
             [
                 "6c0da17beb12fd06"
@@ -116,7 +147,7 @@
                 "ad4cd6d8e80840ae"
             ],
             [
-                "48f2f049a70ea3da"
+                "848ff09def5dc064"
             ],
             [
                 "0a5c9d4d7b1d71ce"
@@ -128,7 +159,7 @@
         "type": "debug",
         "z": "74b807c803dade99",
         "name": "Others",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -136,8 +167,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 90,
-        "y": 200,
+        "x": 130,
+        "y": 220,
         "wires": []
     },
     {
@@ -145,18 +176,18 @@
         "type": "function",
         "z": "74b807c803dade99",
         "name": "Add Location",
-        "func": "const deviceLocations = [\n    { \"id\": \"A4:C1:38:21:C9:85\", \"house\": \"1 sayfield cottages\", \"room\": \"office\" },\n    { \"id\": \"A4:C1:38:17:06:8A\", \"house\": \"1 sayfield cottages\", \"room\": \"main bedroom\" },\n    { \"id\": \"A4:C1:38:14:B9:D7\", \"house\": \"1 sayfield cottages\", \"room\": \"playroom\" },\n    { \"id\": \"A4:C1:38:7B:29:6C\", \"house\": \"1 sayfield cottages\", \"room\": \"jan bedroom\" },\n    { \"id\": \"A4:C1:38:5B:DF:9E\", \"house\": \"1 sayfield cottages\", \"room\": \"tomek bedroom\" },\n    { \"id\": \"A4:C1:38:94:21:EC\", \"house\": \"1 sayfield cottages\", \"room\": \"workshop\" },\n    { \"id\": \"A4:C1:38:E1:1E:45\", \"house\": \"1 sayfield cottages\", \"room\": \"greenhouse\" },\n    { \"id\": \"A4:C1:38:34:70:8B\", \"house\": \"1 sayfield cottages\", \"room\": \"loft\" }\n];\n\nconst deviceLoation = deviceLocations.find(l => l.id == msg.payload.id);\n\nif (!!deviceLoation) {\n    msg.payload.house = deviceLoation.house;\n    msg.payload.room = deviceLoation.room;\n}\n\nreturn msg;",
+        "func": "let deviceLocations = flow.get('deviceLocations') || [];\n\nif (!deviceLocations.length) {\n    return msg;\n}\n\n// if (!deviceLocations.length) {\n//     deviceLocations = [\n//         { \"id\": \"A4:C1:38:21:C9:85\", \"house\": \"1 sayfield cottages\", \"room\": \"office\" },\n//         { \"id\": \"A4:C1:38:17:06:8A\", \"house\": \"1 sayfield cottages\", \"room\": \"main bedroom\" },\n//         { \"id\": \"A4:C1:38:14:B9:D7\", \"house\": \"1 sayfield cottages\", \"room\": \"playroom\" },\n//         { \"id\": \"A4:C1:38:7B:29:6C\", \"house\": \"1 sayfield cottages\", \"room\": \"jan bedroom\" },\n//         { \"id\": \"A4:C1:38:5B:DF:9E\", \"house\": \"1 sayfield cottages\", \"room\": \"tomek bedroom\" },\n//         { \"id\": \"A4:C1:38:94:21:EC\", \"house\": \"1 sayfield cottages\", \"room\": \"workshop\" },\n//         { \"id\": \"A4:C1:38:E1:1E:45\", \"house\": \"1 sayfield cottages\", \"room\": \"greenhouse\" },\n//         { \"id\": \"A4:C1:38:34:70:8B\", \"house\": \"1 sayfield cottages\", \"room\": \"loft\" }\n//     ];\n\n//     flow.set('deviceLocations', deviceLocations);\n// }\n\nconst deviceLoation = deviceLocations.find(l => l.id == msg.payload.id);\n\nif (!!deviceLoation) {\n    msg.payload.house = deviceLoation.house;\n    msg.payload.room = deviceLoation.room;\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
-        "y": 140,
+        "x": 620,
+        "y": 200,
         "wires": [
             [
-                "a08c6d7bd80937ec"
+                "8652629ae92e2a69"
             ]
         ]
     },
@@ -172,8 +203,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 240,
-        "y": 280,
+        "x": 160,
+        "y": 300,
         "wires": [
             [
                 "d00564d0547d710e"
@@ -201,8 +232,8 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 80,
-        "y": 360,
+        "x": 100,
+        "y": 580,
         "wires": [
             [
                 "83fbe993c9319dfc"
@@ -221,8 +252,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 260,
-        "y": 360,
+        "x": 280,
+        "y": 580,
         "wires": [
             [
                 "2e7998c322b72528",
@@ -243,8 +274,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 440,
-        "y": 360,
+        "x": 460,
+        "y": 580,
         "wires": []
     },
     {
@@ -261,7 +292,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 320,
-        "y": 40,
+        "y": 60,
         "wires": []
     },
     {
@@ -278,7 +309,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 350,
-        "y": 80,
+        "y": 100,
         "wires": []
     },
     {
@@ -293,8 +324,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 250,
-        "y": 440,
+        "x": 270,
+        "y": 640,
         "wires": [
             [
                 "4d82ab8f033cc89b"
@@ -314,8 +345,425 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 430,
-        "y": 440,
+        "x": 450,
+        "y": 640,
         "wires": []
+    },
+    {
+        "id": "e12d989826c13475",
+        "type": "inject",
+        "z": "74b807c803dade99",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 780,
+        "wires": [
+            [
+                "945657e657340528"
+            ]
+        ]
+    },
+    {
+        "id": "945657e657340528",
+        "type": "function",
+        "z": "74b807c803dade99",
+        "name": "Reset DeviceLocations",
+        "func": "flow.set('deviceLocations', undefined);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2d269c6b53497091",
+        "type": "inject",
+        "z": "74b807c803dade99",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 820,
+        "wires": [
+            [
+                "e711b6b85d67db53"
+            ]
+        ]
+    },
+    {
+        "id": "e711b6b85d67db53",
+        "type": "function",
+        "z": "74b807c803dade99",
+        "name": "Reset Thermometers",
+        "func": "flow.set('thermometers', []);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "848ff09def5dc064",
+        "type": "switch",
+        "z": "74b807c803dade99",
+        "name": "Known Sensors Empty",
+        "property": "deviceLocations",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "undefined",
+                "vt": "jsonata"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 400,
+        "y": 160,
+        "wires": [
+            [
+                "5170b63c369f9772"
+            ],
+            [
+                "48f2f049a70ea3da"
+            ]
+        ]
+    },
+    {
+        "id": "5170b63c369f9772",
+        "type": "file in",
+        "z": "74b807c803dade99",
+        "name": "Load Device Locations",
+        "filename": "/home/darek/.node-red/projects/BTGateway/sensors.json",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 640,
+        "y": 60,
+        "wires": [
+            [
+                "f0aa1503f9f26294"
+            ]
+        ]
+    },
+    {
+        "id": "f0aa1503f9f26294",
+        "type": "json",
+        "z": "74b807c803dade99",
+        "name": "To Objects",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 670,
+        "y": 100,
+        "wires": [
+            [
+                "56b04d6497f0877d"
+            ]
+        ]
+    },
+    {
+        "id": "56b04d6497f0877d",
+        "type": "change",
+        "z": "74b807c803dade99",
+        "name": "Set Device Locations",
+        "rules": [
+            {
+                "t": "set",
+                "p": "deviceLocations",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8652629ae92e2a69",
+        "type": "function",
+        "z": "74b807c803dade99",
+        "name": "Add Category",
+        "func": "msg.payload.category = 'environment';\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 240,
+        "wires": [
+            [
+                "a08c6d7bd80937ec"
+            ]
+        ]
+    },
+    {
+        "id": "f598a8e72bf30ce5",
+        "type": "inject",
+        "z": "74b807c803dade99",
+        "name": "Send Readings",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 380,
+        "wires": [
+            [
+                "c94d55ebb3d98043"
+            ]
+        ]
+    },
+    {
+        "id": "c94d55ebb3d98043",
+        "type": "function",
+        "z": "74b807c803dade99",
+        "name": "Get Latest Readings",
+        "func": "let readings = [];\nconst thermometers = flow.get('thermometers') || [];\n\nif (!thermometers.length) {\n    return msg;\n}\n\nfor (let t of thermometers) {\n    const sensor = t.payload;\n    const reading = {\n        id: sensor.id,\n        name: sensor.name,\n        brand: sensor.brand,\n        model: sensor.model_id.replaceAll('/', '_'),\n        last_logged: t.lastLogged,\n        tempc: sensor.tempc,\n        tempf: sensor.tempf,\n        hum: sensor.hum,\n        batt: sensor.batt,\n        category: sensor.category,\n        house: sensor.house,\n        room: sensor.room\n    };\n    readings.push(reading);\n}\n\nmsg.payload = readings;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 420,
+        "wires": [
+            [
+                "47d499b77bb172ea"
+            ]
+        ]
+    },
+    {
+        "id": "47d499b77bb172ea",
+        "type": "split",
+        "z": "74b807c803dade99",
+        "name": "Split Array",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "property": "payload",
+        "x": 330,
+        "y": 460,
+        "wires": [
+            [
+                "b4c34bcc9dcf65ff"
+            ]
+        ]
+    },
+    {
+        "id": "abc3e9f9735cd19d",
+        "type": "debug",
+        "z": "74b807c803dade99",
+        "name": "Sensor Data",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "cb3a451947d20a5b",
+        "type": "mqtt out",
+        "z": "74b807c803dade99",
+        "name": "synology-pub",
+        "topic": "",
+        "qos": "1",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "942356b676cc26bd",
+        "x": 580,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "b4c34bcc9dcf65ff",
+        "type": "function",
+        "z": "74b807c803dade99",
+        "name": "Add Topic",
+        "func": "const payload = msg.payload;\nconst { house, room, category, model, name } = msg.payload;\nlet topic = `${house}/${room}/${category}/${model}/${name}`;\n\nreturn {\n    topic: topic.replaceAll(' ', '_'),\n    payload: payload\n};\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 500,
+        "wires": [
+            [
+                "cb3a451947d20a5b"
+            ]
+        ]
+    },
+    {
+        "id": "2e9eec8f9349ac02",
+        "type": "inject",
+        "z": "74b807c803dade99",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 100,
+        "y": 720,
+        "wires": [
+            [
+                "92e5ba59659f916f"
+            ]
+        ]
+    },
+    {
+        "id": "92e5ba59659f916f",
+        "type": "function",
+        "z": "74b807c803dade99",
+        "name": "Get Device Locations",
+        "func": "const dl = flow.get('deviceLocations');\n\nmsg.payload = dl;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 720,
+        "wires": [
+            [
+                "7955e11bcfccd27f"
+            ]
+        ]
+    },
+    {
+        "id": "7955e11bcfccd27f",
+        "type": "debug",
+        "z": "74b807c803dade99",
+        "name": "Device Locations",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 530,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "6ac91ed426f33bfe",
+        "type": "mqtt in",
+        "z": "74b807c803dade99",
+        "name": "synology-sub",
+        "topic": "1_sayfield_cottages/#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "942356b676cc26bd",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 550,
+        "y": 380,
+        "wires": [
+            [
+                "abc3e9f9735cd19d"
+            ]
+        ]
     }
 ]
