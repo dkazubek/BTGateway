@@ -8,6 +8,14 @@
         "env": []
     },
     {
+        "id": "355331eeacc1f1ef",
+        "type": "tab",
+        "label": "System",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "f52e6d328feab719",
         "type": "mqtt-broker",
         "name": "raspi-bp",
@@ -70,6 +78,122 @@
         "sessionExpiry": ""
     },
     {
+        "id": "dd4388f4f1af78a1",
+        "type": "ui_tab",
+        "name": "BTGateway",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "38d1eecfd33d528f",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "faa0163f2dce0c6c",
+        "type": "ui_group",
+        "name": "System",
+        "tab": "dd4388f4f1af78a1",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
         "id": "95afb7d175fec37f",
         "type": "mqtt in",
         "z": "74b807c803dade99",
@@ -103,8 +227,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 380,
-        "y": 300,
+        "x": 660,
+        "y": 320,
         "wires": []
     },
     {
@@ -203,8 +327,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 160,
-        "y": 300,
+        "x": 660,
+        "y": 280,
         "wires": [
             [
                 "d00564d0547d710e"
@@ -233,7 +357,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 580,
+        "y": 520,
         "wires": [
             [
                 "83fbe993c9319dfc"
@@ -253,7 +377,7 @@
         "finalize": "",
         "libs": [],
         "x": 280,
-        "y": 580,
+        "y": 520,
         "wires": [
             [
                 "2e7998c322b72528",
@@ -275,7 +399,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 460,
-        "y": 580,
+        "y": 520,
         "wires": []
     },
     {
@@ -325,7 +449,7 @@
         "finalize": "",
         "libs": [],
         "x": 270,
-        "y": 640,
+        "y": 580,
         "wires": [
             [
                 "4d82ab8f033cc89b"
@@ -346,7 +470,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 450,
-        "y": 640,
+        "y": 580,
         "wires": []
     },
     {
@@ -371,7 +495,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 780,
+        "y": 700,
         "wires": [
             [
                 "945657e657340528"
@@ -391,7 +515,7 @@
         "finalize": "",
         "libs": [],
         "x": 310,
-        "y": 780,
+        "y": 700,
         "wires": [
             []
         ]
@@ -418,7 +542,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 820,
+        "y": 740,
         "wires": [
             [
                 "e711b6b85d67db53"
@@ -438,7 +562,7 @@
         "finalize": "",
         "libs": [],
         "x": 300,
-        "y": 820,
+        "y": 740,
         "wires": [
             []
         ]
@@ -577,7 +701,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 120,
-        "y": 380,
+        "y": 280,
         "wires": [
             [
                 "c94d55ebb3d98043"
@@ -596,8 +720,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 240,
-        "y": 420,
+        "x": 140,
+        "y": 320,
         "wires": [
             [
                 "47d499b77bb172ea"
@@ -616,8 +740,8 @@
         "stream": false,
         "addname": "",
         "property": "payload",
-        "x": 330,
-        "y": 460,
+        "x": 110,
+        "y": 360,
         "wires": [
             [
                 "b4c34bcc9dcf65ff"
@@ -629,7 +753,7 @@
         "type": "debug",
         "z": "74b807c803dade99",
         "name": "Sensor Data",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -655,8 +779,8 @@
         "correl": "",
         "expiry": "",
         "broker": "942356b676cc26bd",
-        "x": 580,
-        "y": 500,
+        "x": 120,
+        "y": 440,
         "wires": []
     },
     {
@@ -671,8 +795,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 400,
-        "y": 500,
+        "x": 100,
+        "y": 400,
         "wires": [
             [
                 "cb3a451947d20a5b"
@@ -701,7 +825,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 100,
-        "y": 720,
+        "y": 620,
         "wires": [
             [
                 "92e5ba59659f916f"
@@ -721,7 +845,7 @@
         "finalize": "",
         "libs": [],
         "x": 300,
-        "y": 720,
+        "y": 620,
         "wires": [
             [
                 "7955e11bcfccd27f"
@@ -742,7 +866,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 530,
-        "y": 720,
+        "y": 620,
         "wires": []
     },
     {
@@ -765,5 +889,218 @@
                 "abc3e9f9735cd19d"
             ]
         ]
+    },
+    {
+        "id": "9275611929306795",
+        "type": "inject",
+        "z": "355331eeacc1f1ef",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 90,
+        "y": 220,
+        "wires": [
+            [
+                "f8c71ecc5760d6e4",
+                "21989b436838407c",
+                "d7f531765bae8fab"
+            ]
+        ]
+    },
+    {
+        "id": "f8c71ecc5760d6e4",
+        "type": "exec",
+        "z": "355331eeacc1f1ef",
+        "command": "vcgencmd measure_temp",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "RPi CPU temperature",
+        "x": 260,
+        "y": 140,
+        "wires": [
+            [
+                "61b089d4a6ba8965"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "920e5cae8efa5273",
+        "type": "debug",
+        "z": "355331eeacc1f1ef",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 540,
+        "y": 20,
+        "wires": []
+    },
+    {
+        "id": "61b089d4a6ba8965",
+        "type": "change",
+        "z": "355331eeacc1f1ef",
+        "name": "Extract Value",
+        "rules": [
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "temp=",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "'C",
+                "fromt": "str",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 80,
+        "wires": [
+            [
+                "920e5cae8efa5273",
+                "8006f3e8687bd234"
+            ]
+        ]
+    },
+    {
+        "id": "8006f3e8687bd234",
+        "type": "ui_gauge",
+        "z": "355331eeacc1f1ef",
+        "name": "",
+        "group": "faa0163f2dce0c6c",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "CPU Temp",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "60",
+        "seg2": "80",
+        "diff": false,
+        "className": "",
+        "x": 510,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "21989b436838407c",
+        "type": "exec",
+        "z": "355331eeacc1f1ef",
+        "command": "top -d 0.5 -b -n2 | grep Cpu | tail -1 | awk '{print 100-$8}'",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "CPU Load",
+        "x": 330,
+        "y": 300,
+        "wires": [
+            [
+                "4d634414818262fe"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "4d634414818262fe",
+        "type": "debug",
+        "z": "355331eeacc1f1ef",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "d7f531765bae8fab",
+        "type": "exec",
+        "z": "355331eeacc1f1ef",
+        "command": "/home/darek/raspi/.venv/bin/python /home/darek/.node-red/projects/BTGateway/mem.py -u",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Memory Used",
+        "x": 340,
+        "y": 380,
+        "wires": [
+            [
+                "e1826342bd8ee075"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "e1826342bd8ee075",
+        "type": "debug",
+        "z": "355331eeacc1f1ef",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 520,
+        "y": 340,
+        "wires": []
     }
 ]
