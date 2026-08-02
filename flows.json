@@ -228,7 +228,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 660,
-        "y": 320,
+        "y": 360,
         "wires": []
     },
     {
@@ -328,7 +328,7 @@
         "finalize": "",
         "libs": [],
         "x": 660,
-        "y": 280,
+        "y": 320,
         "wires": [
             [
                 "d00564d0547d710e"
@@ -675,7 +675,7 @@
         "y": 240,
         "wires": [
             [
-                "a08c6d7bd80937ec"
+                "3e5edc08a7ac3a8d"
             ]
         ]
     },
@@ -713,7 +713,7 @@
         "type": "function",
         "z": "74b807c803dade99",
         "name": "Get Latest Readings",
-        "func": "let readings = [];\nconst thermometers = flow.get('thermometers') || [];\n\nif (!thermometers.length) {\n    return msg;\n}\n\nfor (let t of thermometers) {\n    const sensor = t.payload;\n    const reading = {\n        id: sensor.id,\n        name: sensor.name,\n        brand: sensor.brand,\n        model: sensor.model_id.replaceAll('/', '_'),\n        last_logged: t.lastLogged,\n        tempc: sensor.tempc,\n        tempf: sensor.tempf,\n        hum: sensor.hum,\n        batt: sensor.batt,\n        category: sensor.category,\n        house: sensor.house,\n        room: sensor.room\n    };\n    readings.push(reading);\n}\n\nmsg.payload = readings;\n\nreturn msg;",
+        "func": "let readings = [];\nconst thermometers = flow.get('thermometers') || [];\n\nif (!thermometers.length) {\n    return msg;\n}\n\nfor (let t of thermometers) {\n    const sensor = t.payload;\n    const reading = {\n        id: sensor.id,\n        name: sensor.name,\n        brand: sensor.brand,\n        model: sensor.model_id.replaceAll('/', '_'),\n        last_logged: t.lastLogged,\n        tempc: sensor.tempc,\n        tempf: sensor.tempf,\n        hum: sensor.hum,\n        batt: sensor.batt,\n        category: sensor.category,\n        house: sensor.house,\n        room: sensor.room,\n        type: sensor.type\n    };\n    readings.push(reading);\n}\n\nmsg.payload = readings;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -762,7 +762,7 @@
         "statusVal": "",
         "statusType": "auto",
         "x": 670,
-        "y": 420,
+        "y": 480,
         "wires": []
     },
     {
@@ -799,7 +799,8 @@
         "y": 400,
         "wires": [
             [
-                "cb3a451947d20a5b"
+                "cb3a451947d20a5b",
+                "2d9db675c79dbda9"
             ]
         ]
     },
@@ -883,10 +884,46 @@
         "rh": 0,
         "inputs": 0,
         "x": 550,
-        "y": 380,
+        "y": 440,
         "wires": [
             [
                 "abc3e9f9735cd19d"
+            ]
+        ]
+    },
+    {
+        "id": "2d9db675c79dbda9",
+        "type": "debug",
+        "z": "74b807c803dade99",
+        "name": "debug 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "3e5edc08a7ac3a8d",
+        "type": "function",
+        "z": "74b807c803dade99",
+        "name": "Add Sensor Type",
+        "func": "msg.payload.type = 'thermometer';\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 280,
+        "wires": [
+            [
+                "a08c6d7bd80937ec"
             ]
         ]
     },
