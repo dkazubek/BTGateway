@@ -194,27 +194,6 @@
         "className": ""
     },
     {
-        "id": "95afb7d175fec37f",
-        "type": "mqtt in",
-        "z": "74b807c803dade99",
-        "name": "raspi-bp-sub",
-        "topic": "#",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "f52e6d328feab719",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 90,
-        "y": 60,
-        "wires": [
-            [
-                "0ed195331a3babcc"
-            ]
-        ]
-    },
-    {
         "id": "d00564d0547d710e",
         "type": "debug",
         "z": "74b807c803dade99",
@@ -753,7 +732,7 @@
         "type": "debug",
         "z": "74b807c803dade99",
         "name": "Sensor Data",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -761,8 +740,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 670,
-        "y": 480,
+        "x": 870,
+        "y": 560,
         "wires": []
     },
     {
@@ -772,7 +751,7 @@
         "name": "synology-pub",
         "topic": "",
         "qos": "1",
-        "retain": "true",
+        "retain": "false",
         "respTopic": "",
         "contentType": "",
         "userProps": "",
@@ -799,8 +778,7 @@
         "y": 400,
         "wires": [
             [
-                "cb3a451947d20a5b",
-                "2d9db675c79dbda9"
+                "cb3a451947d20a5b"
             ]
         ]
     },
@@ -877,35 +855,19 @@
         "name": "synology-sub",
         "topic": "1_sayfield_cottages/#",
         "qos": "2",
-        "datatype": "auto-detect",
+        "datatype": "utf8",
         "broker": "942356b676cc26bd",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 550,
-        "y": 440,
+        "x": 750,
+        "y": 520,
         "wires": [
             [
                 "abc3e9f9735cd19d"
             ]
         ]
-    },
-    {
-        "id": "2d9db675c79dbda9",
-        "type": "debug",
-        "z": "74b807c803dade99",
-        "name": "debug 4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 320,
-        "y": 400,
-        "wires": []
     },
     {
         "id": "3e5edc08a7ac3a8d",
@@ -924,6 +886,27 @@
         "wires": [
             [
                 "a08c6d7bd80937ec"
+            ]
+        ]
+    },
+    {
+        "id": "95afb7d175fec37f",
+        "type": "mqtt in",
+        "z": "74b807c803dade99",
+        "name": "raspi-bp-sub",
+        "topic": "#",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "f52e6d328feab719",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 60,
+        "wires": [
+            [
+                "0ed195331a3babcc"
             ]
         ]
     },
