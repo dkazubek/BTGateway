@@ -3,6 +3,12 @@ BTGateway
 
 Bluetooth Gateway
 
+<p align="center">
+  <img src="images/raspberry-pi-02w.jpeg" alt="My Raspberry Pi" width="600"><br>
+  <em>Figure 1: My Raspberry Pi 02W setup running headless.</em>
+</p>
+
+
 ## System Architecture
 
 ```mermaid
