@@ -50,7 +50,7 @@
         "id": "942356b676cc26bd",
         "type": "mqtt-broker",
         "name": "synology",
-        "broker": "192.168.1.187",
+        "broker": "${CENTRAL_MQTT_HOST}",
         "port": 1883,
         "clientid": "",
         "autoConnect": true,
@@ -194,24 +194,15 @@
         "className": ""
     },
     {
-        "id": "95afb7d175fec37f",
-        "type": "mqtt in",
-        "z": "74b807c803dade99",
-        "name": "raspi-bp-sub",
-        "topic": "#",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "f52e6d328feab719",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 90,
-        "y": 60,
-        "wires": [
-            [
-                "0ed195331a3babcc"
-            ]
+        "id": "170a83de78465703",
+        "type": "global-config",
+        "name": "global-config",
+        "env": [
+            {
+                "name": "CENTRAL_MQTT_HOST",
+                "value": "192.168.1.187",
+                "type": "str"
+            }
         ]
     },
     {
@@ -300,7 +291,7 @@
         "type": "function",
         "z": "74b807c803dade99",
         "name": "Add Location",
-        "func": "let deviceLocations = flow.get('deviceLocations') || [];\n\nif (!deviceLocations.length) {\n    return msg;\n}\n\n// if (!deviceLocations.length) {\n//     deviceLocations = [\n//         { \"id\": \"A4:C1:38:21:C9:85\", \"house\": \"1 sayfield cottages\", \"room\": \"office\" },\n//         { \"id\": \"A4:C1:38:17:06:8A\", \"house\": \"1 sayfield cottages\", \"room\": \"main bedroom\" },\n//         { \"id\": \"A4:C1:38:14:B9:D7\", \"house\": \"1 sayfield cottages\", \"room\": \"playroom\" },\n//         { \"id\": \"A4:C1:38:7B:29:6C\", \"house\": \"1 sayfield cottages\", \"room\": \"jan bedroom\" },\n//         { \"id\": \"A4:C1:38:5B:DF:9E\", \"house\": \"1 sayfield cottages\", \"room\": \"tomek bedroom\" },\n//         { \"id\": \"A4:C1:38:94:21:EC\", \"house\": \"1 sayfield cottages\", \"room\": \"workshop\" },\n//         { \"id\": \"A4:C1:38:E1:1E:45\", \"house\": \"1 sayfield cottages\", \"room\": \"greenhouse\" },\n//         { \"id\": \"A4:C1:38:34:70:8B\", \"house\": \"1 sayfield cottages\", \"room\": \"loft\" }\n//     ];\n\n//     flow.set('deviceLocations', deviceLocations);\n// }\n\nconst deviceLoation = deviceLocations.find(l => l.id == msg.payload.id);\n\nif (!!deviceLoation) {\n    msg.payload.house = deviceLoation.house;\n    msg.payload.room = deviceLoation.room;\n}\n\nreturn msg;",
+        "func": "let deviceLocations = flow.get('deviceLocations') || [];\n\nif (!deviceLocations.length) {\n    return msg;\n}\n\nconst deviceLoation = deviceLocations.find(l => l.id == msg.payload.id);\n\nif (!!deviceLoation) {\n    msg.payload.house = deviceLoation.house;\n    msg.payload.room = deviceLoation.room;\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -761,8 +752,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 670,
-        "y": 480,
+        "x": 870,
+        "y": 560,
         "wires": []
     },
     {
@@ -772,7 +763,7 @@
         "name": "synology-pub",
         "topic": "",
         "qos": "1",
-        "retain": "true",
+        "retain": "false",
         "respTopic": "",
         "contentType": "",
         "userProps": "",
@@ -799,8 +790,7 @@
         "y": 400,
         "wires": [
             [
-                "cb3a451947d20a5b",
-                "2d9db675c79dbda9"
+                "cb3a451947d20a5b"
             ]
         ]
     },
@@ -877,35 +867,19 @@
         "name": "synology-sub",
         "topic": "1_sayfield_cottages/#",
         "qos": "2",
-        "datatype": "auto-detect",
+        "datatype": "utf8",
         "broker": "942356b676cc26bd",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 550,
-        "y": 440,
+        "x": 750,
+        "y": 520,
         "wires": [
             [
                 "abc3e9f9735cd19d"
             ]
         ]
-    },
-    {
-        "id": "2d9db675c79dbda9",
-        "type": "debug",
-        "z": "74b807c803dade99",
-        "name": "debug 4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 320,
-        "y": 400,
-        "wires": []
     },
     {
         "id": "3e5edc08a7ac3a8d",
@@ -924,6 +898,27 @@
         "wires": [
             [
                 "a08c6d7bd80937ec"
+            ]
+        ]
+    },
+    {
+        "id": "95afb7d175fec37f",
+        "type": "mqtt in",
+        "z": "74b807c803dade99",
+        "name": "raspi-bp-sub",
+        "topic": "#",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "f52e6d328feab719",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 60,
+        "wires": [
+            [
+                "0ed195331a3babcc"
             ]
         ]
     },
