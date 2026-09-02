@@ -202,6 +202,16 @@
                 "name": "CENTRAL_MQTT_HOST",
                 "value": "192.168.1.187",
                 "type": "str"
+            },
+            {
+                "name": "BT_SENSOR_CONFIG",
+                "value": "/home/darek/.node-red/projects/BTGateway/sensors.json",
+                "type": "str"
+            },
+            {
+                "name": "MEMORY_USAGE_COMMAND",
+                "value": "/home/darek/raspi/.venv/bin/python /home/darek/.node-red/projects/BTGateway/mem.py -u",
+                "type": "str"
             }
         ]
     },
@@ -594,7 +604,7 @@
         "type": "file in",
         "z": "74b807c803dade99",
         "name": "Load Device Locations",
-        "filename": "/home/darek/.node-red/projects/BTGateway/sensors.json",
+        "filename": "${BT_SENSOR_CONFIG}",
         "filenameType": "str",
         "format": "utf8",
         "chunk": false,
@@ -740,23 +750,6 @@
         ]
     },
     {
-        "id": "abc3e9f9735cd19d",
-        "type": "debug",
-        "z": "74b807c803dade99",
-        "name": "Sensor Data",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 870,
-        "y": 560,
-        "wires": []
-    },
-    {
         "id": "cb3a451947d20a5b",
         "type": "mqtt out",
         "z": "74b807c803dade99",
@@ -859,27 +852,6 @@
         "x": 530,
         "y": 620,
         "wires": []
-    },
-    {
-        "id": "6ac91ed426f33bfe",
-        "type": "mqtt in",
-        "z": "74b807c803dade99",
-        "name": "synology-sub",
-        "topic": "1_sayfield_cottages/#",
-        "qos": "2",
-        "datatype": "utf8",
-        "broker": "942356b676cc26bd",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 750,
-        "y": 520,
-        "wires": [
-            [
-                "abc3e9f9735cd19d"
-            ]
-        ]
     },
     {
         "id": "3e5edc08a7ac3a8d",
@@ -1100,7 +1072,7 @@
         "id": "d7f531765bae8fab",
         "type": "exec",
         "z": "355331eeacc1f1ef",
-        "command": "/home/darek/raspi/.venv/bin/python /home/darek/.node-red/projects/BTGateway/mem.py -u",
+        "command": "${MEMORY_USAGE_COMMAND}",
         "addpay": "payload",
         "append": "",
         "useSpawn": "false",
