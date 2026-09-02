@@ -25,6 +25,7 @@ graph TD
     subgraph Edge_Gateway [Raspberry Pi Zero 2 W - Bare-Metal OS]
         BTM[Built-in BLE Module]
         PY[Theengs BLE MQTT gateway]
+
         NR[Node-RED Flow<br/>Filter & Router]
 
         BT -- "Bluetooth LE Broadcast" --> BTM

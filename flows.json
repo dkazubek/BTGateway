@@ -192,6 +192,7 @@
         "width": 6,
         "collapse": false,
         "className": ""
+<<<<<<< HEAD
     },
     {
         "id": "95afb7d175fec37f",
@@ -213,6 +214,8 @@
                 "0ed195331a3babcc"
             ]
         ]
+=======
+>>>>>>> 03af0ea4fa0261871fd061ca42d253a69f7edccc
     },
     {
         "id": "d00564d0547d710e",
@@ -753,7 +756,11 @@
         "type": "debug",
         "z": "74b807c803dade99",
         "name": "Sensor Data",
+<<<<<<< HEAD
         "active": false,
+=======
+        "active": true,
+>>>>>>> 03af0ea4fa0261871fd061ca42d253a69f7edccc
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -761,8 +768,13 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
+<<<<<<< HEAD
         "x": 670,
         "y": 480,
+=======
+        "x": 870,
+        "y": 560,
+>>>>>>> 03af0ea4fa0261871fd061ca42d253a69f7edccc
         "wires": []
     },
     {
@@ -772,7 +784,11 @@
         "name": "synology-pub",
         "topic": "",
         "qos": "1",
+<<<<<<< HEAD
         "retain": "true",
+=======
+        "retain": "false",
+>>>>>>> 03af0ea4fa0261871fd061ca42d253a69f7edccc
         "respTopic": "",
         "contentType": "",
         "userProps": "",
@@ -799,8 +815,12 @@
         "y": 400,
         "wires": [
             [
+<<<<<<< HEAD
                 "cb3a451947d20a5b",
                 "2d9db675c79dbda9"
+=======
+                "cb3a451947d20a5b"
+>>>>>>> 03af0ea4fa0261871fd061ca42d253a69f7edccc
             ]
         ]
     },
@@ -877,14 +897,23 @@
         "name": "synology-sub",
         "topic": "1_sayfield_cottages/#",
         "qos": "2",
+<<<<<<< HEAD
         "datatype": "auto-detect",
+=======
+        "datatype": "utf8",
+>>>>>>> 03af0ea4fa0261871fd061ca42d253a69f7edccc
         "broker": "942356b676cc26bd",
         "nl": false,
         "rap": true,
         "rh": 0,
         "inputs": 0,
+<<<<<<< HEAD
         "x": 550,
         "y": 440,
+=======
+        "x": 750,
+        "y": 520,
+>>>>>>> 03af0ea4fa0261871fd061ca42d253a69f7edccc
         "wires": [
             [
                 "abc3e9f9735cd19d"
@@ -892,6 +921,7 @@
         ]
     },
     {
+<<<<<<< HEAD
         "id": "2d9db675c79dbda9",
         "type": "debug",
         "z": "74b807c803dade99",
@@ -908,6 +938,8 @@
         "wires": []
     },
     {
+=======
+>>>>>>> 03af0ea4fa0261871fd061ca42d253a69f7edccc
         "id": "3e5edc08a7ac3a8d",
         "type": "function",
         "z": "74b807c803dade99",
@@ -928,6 +960,30 @@
         ]
     },
     {
+<<<<<<< HEAD
+=======
+        "id": "95afb7d175fec37f",
+        "type": "mqtt in",
+        "z": "74b807c803dade99",
+        "name": "raspi-bp-sub",
+        "topic": "#",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "f52e6d328feab719",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 60,
+        "wires": [
+            [
+                "0ed195331a3babcc"
+            ]
+        ]
+    },
+    {
+>>>>>>> 03af0ea4fa0261871fd061ca42d253a69f7edccc
         "id": "9275611929306795",
         "type": "inject",
         "z": "355331eeacc1f1ef",
