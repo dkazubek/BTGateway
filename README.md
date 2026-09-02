@@ -47,7 +47,7 @@ graph TD
 
     %% Data Pipeline Paths
     NR -- "MQTT (Filtered - Port 1883)" --> MQ
-    NR -- "MQTT over TLS (Port 8883)" --> AZ
+    NR -. "Planned: MQTT over TLS (Port 8883)" .-> AZ
 
     %% High-Contrast Styling Realignment
     style BT fill:#ff66cc,stroke:#222,stroke-width:2px,color:#000000
@@ -87,6 +87,11 @@ The timestamp, location, category, and sensor type data are added by the flow.
 
 1. **Hardware:** Raspberry Pi Zero 2 W quite comfortable runs Theengs Gateway and Node-RED.
 2. **Software:** [Theengs Gateway](https://gateway.theengs.io/install/install.html) with its prerequisites and [Node-RED](https://nodered.org/docs/getting-started/raspberrypi) following their official getting started guide. No extra nodes had to be installed.
+3. **Python helper:** `mem.py` reports memory usage for the Node-RED health dashboard. Install its dependency:
+
+```bash
+   sudo apt install python3-psutil
+```
 
 ### Reliability & Security
 

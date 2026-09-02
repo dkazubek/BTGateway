@@ -1,7 +1,16 @@
 {
-    "name": "BTGateway",
-    "description": "Bluetooth Gateway",
-    "version": "0.0.1",
+  "name": "btgateway",
+  "version": "0.1.0",
+  "description": "Node-RED edge gateway for collecting Bluetooth Low Energy thermometer telemetry on a Raspberry Pi Zero 2 W and publishing enriched readings over MQTT.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dkazubek/BTGateway.git"
+  },
+  "bugs": {
+    "url": "https://github.com/dkazubek/BTGateway/issues"
+  },
+  "homepage": "https://github.com/dkazubek/BTGateway#readme",
     "dependencies": {},
     "node-red": {
         "settings": {
