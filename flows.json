@@ -197,23 +197,7 @@
         "id": "170a83de78465703",
         "type": "global-config",
         "name": "global-config",
-        "env": [
-            {
-                "name": "CENTRAL_MQTT_HOST",
-                "value": "192.168.1.187",
-                "type": "str"
-            },
-            {
-                "name": "BT_SENSOR_CONFIG",
-                "value": "/home/darek/.node-red/projects/BTGateway/sensors.json",
-                "type": "str"
-            },
-            {
-                "name": "MEMORY_USAGE_COMMAND",
-                "value": "/home/darek/raspi/.venv/bin/python /home/darek/.node-red/projects/BTGateway/mem.py -u",
-                "type": "str"
-            }
-        ]
+        "env": []
     },
     {
         "id": "d00564d0547d710e",
